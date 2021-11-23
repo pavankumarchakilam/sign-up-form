@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Signup page</title>
+	<link rel="stylesheet" type="text/css" href="signupcss.css">
+
+</head>
+<body>
+	<form onsubmit="return validation()">
+		<h1>SignUp</h1>
+		<input type="text" placeholder="Username" id="user" autocomplete="off"><br>
+		<span id="username" class="span-class"></span><br>
+		<input type="text" name="email" placeholder="Email Id" id="email" autocomplete="off"><br>
+		<span id="emailval" class="span-class"></span>
+		<input type="password" placeholder="Enter password of max length=10" id="pass"><br>
+		<span id="password" class="span-class"></span><br>
+		<input type="password" name="conpass" placeholder="Confirm Password" id="conpass"><br>
+		<span id="Confirmpassword" class="span-class"></span><br>
+		<button type="submit" name="submit" value="submit">SignUp</button><br>
+		<span id="total" class="span-class"></span>
+	</form>
+	<script type="text/javascript">
+		function validation(){
+			var users = document.getElementById("user");
+			var pass=document.getElementById("pass");
+			var conpass=document.getElementById("conpass");
+			var email=document.getElementById("email");
+			if(users.value==""&& pass.value=="" && conpass.value=="" && email.value==""){
+				document.getElementById('total').innerHTML="** Please fill all fields";
+				return false;
+			}
+			if(users.value==""){
+					document.getElementById('username').innerHTML="** Please fill the username field";
+					return false;
+			}
+			if(users.value.length<=2 || users.value.length>20){
+				document.getElementById('username').innerHTML="** Username length must be between 3 to 20";
+				return false;
+			}
+			if(!isNaN(users.value)){
+				document.getElementById('username').innerHTML="** Only characters are allowed";
+				return false;
+			}
+			if(email.value==""){
+				document.getElementById('emailval').innerHTML="** Please fill Email-id field";
+				return false;
+			}
+			if(email.value.includes('@')){
+				if(email.value.indexOf('@')<=0){
+					document.getElementById('emailval').innerHTML="@ Symbol invalid position";
+					return false;
+				}
+			}		
+			else{
+				document.getElementById('emailval').innerHTML="@ must be present";
+				return false;
+			}	
+			if(email.value.includes('.')){
+				if((email.value.charAt(email.value.length-4)!='.')&&(email.value.charAt(email.value.length-3)!='.')){
+						document.getElementById('emailval').innerHTML=". symbol invalid position";
+						return false;
+				}
+			}
+			else{
+				document.getElementById('emailval').innerHTML=". symbol must be present";
+				return false;
+			}
+			if(pass.value==""){
+					document.getElementById('password').innerHTML="** Please fill the password field";
+					return false;
+			}
+			if(pass.value.length<5 && pass.value.length>10){
+					document.getElementById('password').innerHTML="** Password length must be between 5 to 10";
+					return false;
+			}
+			if(pass.value!=conpass.value){
+				document.getElementById('Confirmpassword').innerHTML="** Passwords are not matching!!!";
+				return false;
+			}
+			
+
+			
+		}	
+	</script>
+</body>
+</html>
